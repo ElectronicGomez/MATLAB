@@ -1,0 +1,86 @@
+clear all;clc;close all;clc;format compact;format short
+load senal_TF_201801.mat
+SM=[];
+for i=1:1:1000
+    SM=[SM;senal(:,80*(i-1)+1:80*i)];
+end
+%%1.1. Graficar en un mismo cuadro de figura (utilizando “subplot”) 5 funciones muestra del proceso.
+t=0:1/8000:79/8000;
+figure;
+subplot(511);plot(t,SM(1,:));grid on;grid minor;axis([0 0.01 -1.2 1.2]);xlabel('tiempo(s)');ylabel('Valor');title('Funciones Muestras');;
+subplot(512);plot(t,SM(2,:));grid on;grid minor;axis([0 0.01 -1.2 1.2]);xlabel('tiempo(s)');ylabel('Valor');
+subplot(513);plot(t,SM(3,:));grid on;grid minor;axis([0 0.01 -1.2 1.2]);xlabel('tiempo(s)');ylabel('Valor');
+subplot(514);plot(t,SM(4,:));grid on;grid minor;axis([0 0.01 -1.2 1.2]);xlabel('tiempo(s)');ylabel('Valor');
+subplot(515);plot(t,SM(5,:));grid on;grid minor;axis([0 0.01 -1.2 1.2]);xlabel('tiempo(s)');ylabel('Valor');
+
+%1.2. Obtener las medidas estadísticas de primer orden (media y varianza) para 5 instantes de
+%tiempos distintos. Verificar si el proceso presenta estacionariedad de primer orden.
+
+X1=SM(:,15);%-->t1
+X2=SM(:,20);%-->t2
+X3=SM(:,32);%-->t3
+X4=SM(:,36);%-->t4
+X5=SM(:,40);%-->t5
+
+
+x = -1:2:1;
+
+a1=length(find(X1==-1));% cantidad total de menos unos
+b1=length(find(X1==1));% cantidad total de unos
+media1=(-1)*a1/(a1+b1)+(1)*b1/(a1+b1)
+valor_cuadratico_medio1=(-1)^2*a1/(a1+b1)+(1)^2*b1/(a1+b1)
+varianza1=valor_cuadratico_medio1-media1^2
+fprintf('\n');
+y = [a1/(a1+b1) b1/(a1+b1)];
+figure;stem(x,y,'filled');axis([-2 2 0 1]);grid on;grid minor
+xlabel('Valores');ylabel('Probabilidad')
+title('Grafica de Probabilidad para un instante de tiempo(t1=14/8000)')
+
+
+a2=length(find(X2==-1));% cantidad total de menos unos
+b2=length(find(X2==1));% cantidad total de unos
+media2=(-1)*a2/(a2+b2)+(1)*b2/(a2+b2)
+valor_cuadratico_medio2=(-1)^2*a2/(a2+b2)+(1)^2*b2/(a2+b2)
+varianza2=valor_cuadratico_medio2-media2^2
+fprintf('\n');
+y = [a2/(a2+b2) b2/(a2+b2)];
+figure;stem(x,y,'filled');axis([-2 2 0 1]);grid on;grid minor
+xlabel('Valores');ylabel('Probabilidad')
+title('Grafica de Probabilidad para un instante de tiempo(t2=19/8000)')
+
+
+a3=length(find(X3==-1));% cantidad total de menos unos
+b3=length(find(X3==1));% cantidad total de unos
+media3=(-1)*a1/(a3+b3)+(1)*b3/(a3+b3)
+valor_cuadratico_medio3=(-1)^2*a1/(a3+b3)+(1)^2*b3/(a3+b3)
+varianza3=valor_cuadratico_medio3-media3^2
+fprintf('\n');
+y = [a3/(a3+b3) b3/(a3+b3)];
+figure;stem(x,y,'filled');axis([-2 2 0 1]);grid on;grid minor
+xlabel('Valores');ylabel('Probabilidad')
+title('Grafica de Probabilidad para un instante de tiempo(t3=31/8000)')
+
+a4=length(find(X4==-1));% cantidad total de menos unos
+b4=length(find(X4==1));% cantidad total de unos
+media4=(-1)*a4/(a4+b4)+(1)*b4/(a4+b4)
+valor_cuadratico_medio4=(-1)^2*a4/(a4+b4)+(1)^2*b4/(a4+b4)
+varianza4=valor_cuadratico_medio4-media4^2
+fprintf('\n');
+y = [a4/(a4+b4) b4/(a4+b4)];
+figure;stem(x,y,'filled');axis([-2 2 0 1]);grid on;grid minor
+xlabel('Valores');ylabel('Probabilidad')
+title('Grafica de Probabilidad para un instante de tiempo(t4=35/8000)')
+
+
+a5=length(find(X5==-1));% cantidad total de menos unos
+b5=length(find(X5==1));% cantidad total de unos
+media5=(-1)*a5/(a5+b5)+(1)*b5/(a5+b5)
+valor_cuadratico_medio5=(-1)^2*a5/(a5+b5)+(1)^2*b5/(a5+b5)
+varianza5=valor_cuadratico_medio5-media5^2
+fprintf('\n');
+y = [a5/(a5+b5) b5/(a5+b5)];
+figure;stem(x,y,'filled');axis([-2 2 0 1]);grid on;grid minor
+xlabel('Valores');ylabel('Probabilidad')
+title('Grafica de Probabilidad para un instante de tiempo(t5=39/8000)')
+
+

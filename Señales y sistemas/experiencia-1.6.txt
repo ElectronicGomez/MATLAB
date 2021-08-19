@@ -1,0 +1,25 @@
+clear all;clc;close all;clc;format compact;format short
+load senal_TF_201801.mat
+SM=[];
+
+for i=1:1:1000
+    SM=[SM;senal(:,80*(i-1)+1:80*i)];
+end
+
+%%%1.6.Obtener la función de densidad espectral de potencia en Hz, 
+%%%promediando los espectros de potencia de la funciones muestra.
+
+DSP_todasmuestras=[];
+for i=1:1000
+    x=SM(i,:);%x1,x2,x3.......,x1000
+    m=sum(abs(fft(x)))/length(x);
+    DSP=m^2;
+    DSP_todasmuestras=[DSP_todasmuestras;DSP];
+end
+funciones_muestras=[1:1:1000];
+dim=[0.8 0.8 0.1 0.1];
+Potencia_promedio=sum(DSP_todasmuestras)/1000;
+figure;stem(funciones_muestras,DSP_todasmuestras);grid on;xlabel("Mil Funciones muestras");axis([-5 1005 0 35]);
+ylabel("|DSP| para cada funcion muestra");title("Función de Densidad Espectral de Potencia en Hz"); 
+annotation('textbox',dim,'String',["Potencia promedio",Potencia_promedio+"Watt"],'FitBoxToText','on');
+

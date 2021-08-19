@@ -1,0 +1,186 @@
+clear all;clc;close all;clc;format compact;format short
+load senal_TF_201801.mat
+SM=[];
+
+for i=1:1:1000
+    SM=[SM;senal(:,80*(i-1)+1:80*i)];
+end
+%%1.3
+% tau1=(2/8000-2/8000)=0/8000;
+% tau2=(29/8000-25/8000)=4/8000;
+% tau3=(58/8000-52/8000)=6/8000;
+% tau4=(70/8000-62/8000)=8/8000;
+
+%a.1)Primer 'tau1=0/8000'
+X1_1= SM(:,3);Y1_1= SM(:,3);%-->tau1=(2/8000-2/8000)=0/8000;
+Rx1y1_1=0;ii=1;jj=1;fdpxy1_1=zeros(2); 
+for i=-1:2:1
+    for j=-1:2:1
+        k=length(find(X1_1==i & Y1_1==j))/length(X1_1);
+        fdpxy1_1(ii,jj)=k;
+        Rx1y1_1=Rx1y1_1+i*j*k;%correlaciónRXY
+        jj=jj+1;
+    end
+    ii=ii+1;
+    jj=1;
+end
+Rx1y1_1
+% fdpxy1_1
+% x=[-1 1];y=[-1 1];z=[fdpxy1_1(1,1) fdpxy1_1(1,2);fdpxy1_1(2,1) fdpxy1_1(2,2)];
+% figure;stem3(x,y,z,'filled');xlim([-2 2]);ylim([-2 2]);zlim([0 1]);grid on;grid minor;
+% title("Funcion de densidad fxy en el intervalo [2/8000;2/8000]")
+
+%b.1)Segundo 'tau2=4/8000'
+X1_2= SM(:,26);Y1_2= SM(:,30);%-->tau2=(29/8000-25/8000)=4/8000;
+Rx1y1_2=0;ii=1;jj=1;fdpxy1_2=zeros(2); 
+for i=-1:2:1
+    for j=-1:2:1
+        k=length(find(X1_2==i & Y1_2==j))/length(X1_2);
+        fdpxy1_2(ii,jj)=k;
+        Rx1y1_2=Rx1y1_2+i*j*k;%correlaciónRXY
+        jj=jj+1;
+    end
+    ii=ii+1;
+    jj=1;
+end
+Rx1y1_2
+% fdpxy1_2
+% x=[-1 1];y=[-1 1];z=[fdpxy1_2(1,1) fdpxy1_2(1,2);fdpxy1_2(2,1) fdpxy1_2(2,2)];
+% figure;stem3(x,y,z,'filled');xlim([-2 2]);ylim([-2 2]);zlim([0 1]);grid on;grid minor;
+% title("Funcion de densidad fxy en el intervalo [25/8000;29/8000]")
+
+
+%c.1) Tercero 'tau3=6/8000'
+X1_3= SM(:,53);Y1_3= SM(:,59);%-->tau3=(58/8000-52/8000)=6/8000;
+Rx1y1_3=0;ii=1;jj=1;fdpxy1_3=zeros(2); 
+for i=-1:2:1
+    for j=-1:2:1
+        k=length(find(X1_3==i & Y1_3==j))/length(X1_3);
+        fdpxy1_3(ii,jj)=k;
+        Rx1y1_3=Rx1y1_3+i*j*k;%correlaciónRXY
+        jj=jj+1;
+    end
+    ii=ii+1;
+    jj=1;
+end
+Rx1y1_3
+% fdpxy1_3
+% x=[-1 1];y=[-1 1];z=[fdpxy1_3(1,1) fdpxy1_3(1,2);fdpxy1_3(2,1) fdpxy1_3(2,2)];
+% figure;stem3(x,y,z,'filled');xlim([-2 2]);ylim([-2 2]);zlim([0 1]);grid on;grid minor
+% title("Funcion de densidad fxy en el intervalo [52/8000;58/8000]");
+
+%d.1) Cuarto 'tau4=8/8000'
+X1_4= SM(:,32);Y1_4= SM(:,40);%-->tau4=(31/8000-39/8000)=8/8000;
+Rx1y1_4=0;ii=1;jj=1;fdpxy1_4=zeros(2); 
+for i=-1:2:1
+    for j=-1:2:1
+        k=length(find(X1_4==i & Y1_4==j))/length(X1_4);
+        fdpxy1_4(ii,jj)=k;
+        Rx1y1_4=Rx1y1_4+i*j*k;%correlaciónRXY
+        jj=jj+1;
+    end
+    ii=ii+1;
+    jj=1; 
+end
+Rx1y1_4
+% fdpxy1_4
+% x=[-1 1];y=[-1 1];z=[fdpxy1_4(1,1) fdpxy1_4(1,2);fdpxy1_4(2,1) fdpxy1_4(2,2)];
+% figure;stem3(x,y,z,'filled');xlim([-2 2]);ylim([-2 2]);zlim([0 1]);grid on;grid minor
+% title('"Funcion de densidad fxy en el intervalo [31/8000;39/8000]"');
+
+
+% tau1=(27/8000-27/8000)=0/8000;
+% tau2=(39/8000-35/8000)=4/8000;
+% tau3=(67/8000-61/8000)=6/8000;
+% tau4=(79/8000-71/8000)=8/8000;
+
+%a.2)Primer 'tau1=0/8000'
+X2_1= SM(:,28);Y2_1= SM(:,28);%-->tau1=(27/8000-27/8000)=0/8000;
+Rx2y2_1=0;ii=1;jj=1;fdpxy2_1=zeros(2); 
+for i=-1:2:1
+    for j=-1:2:1
+        k=length(find(X2_1==i & Y2_1==j))/length(X2_1);
+        fdpxy2_1(ii,jj)=k;
+        Rx2y2_1=Rx2y2_1+i*j*k;%correlaciónRXY
+        jj=jj+1;
+    end
+    ii=ii+1;
+    jj=1;
+end
+Rx2y2_1
+% fdpxy2_1
+
+%b.2)Segundo 'tau2=4/8000'
+X2_2= SM(:,36);Y2_2= SM(:,40);%-->tau2=(39/8000-35/8000)=4/8000;
+Rx2y2_2=0;ii=1;jj=1;fdpxy2_2=zeros(2); 
+for i=-1:2:1
+    for j=-1:2:1
+        k=length(find(X2_2==i & Y2_2==j))/length(X2_2);
+        fdpxy2_2(ii,jj)=k;
+        Rx2y2_2=Rx2y2_2+i*j*k;%correlaciónRXY
+        jj=jj+1;
+    end
+    ii=ii+1;
+    jj=1;
+end
+Rx2y2_2
+% fdpxy2_2
+
+%c.2) Tercero 'tau3=6/8000'
+X2_3= SM(:,62);Y2_3= SM(:,68);%-->tau3=(67/8000-61/8000)=6/8000;
+Rx2y2_3=0;ii=1;jj=1;fdpxy2_3=zeros(2); 
+for i=-1:2:1
+    for j=-1:2:1
+        k=length(find(X2_3==i & Y2_3==j))/length(X2_3);
+        fdpxy2_3(ii,jj)=k;
+        Rx2y2_3=Rx2y2_3+i*j*k;%correlaciónRXY
+        jj=jj+1;
+    end
+    ii=ii+1;
+    jj=1;
+end
+Rx2y2_3
+% fdpxy2_3
+
+
+%d.2) Cuarto 'tau4=8/8000'
+X2_4= SM(:,72);Y2_4= SM(:,80);%-->tau4=(79/8000-71/8000)=8/8000;
+Rx2y2_4=0;ii=1;jj=1;fdpxy2_4=zeros(2); 
+for i=-1:2:1
+    for j=-1:2:1
+        k=length(find(X2_4==i & Y2_4==j))/length(X2_4);
+        fdpxy2_4(ii,jj)=k;
+        Rx2y2_4=Rx2y2_4+i*j*k;%correlaciónRXY
+        jj=jj+1;
+    end
+    ii=ii+1;
+    jj=1;
+end
+Rx2y2_4
+% fdpxy2_4
+
+%%% Función de Autocorrelación para tau1=0 ([2/8000;2/8000] y [27/8000;27/8000])
+figure;stem3([2 27]/8000,[2 27]/8000,[Rx1y1_1 Rx2y2_1]);grid on;grid minor;xlabel("tiempo(s)");
+ylabel("tiempo(s)");zlabel("Rxy(tau)");title("Función de Autocorrelación para tau1=0 ([2/8000;2/8000] y [27/8000;27/8000])");
+xlim([0 80]/8000); ylim([0 80]/8000);view(-19,23)
+
+%%% Función de Autocorrelación para tau2=4 ([29/8000-25/8000] y [39/8000-35/8000])
+figure;stem3([25 35]/8000,[29 39]/8000,[Rx1y1_2 Rx2y2_2]);grid on;grid minor;xlabel("tiempo(s)");
+ylabel("tiempo(s)");zlabel("Rxy(tau)");title("Función de Autocorrelación para tau2=4 ([29/8000-25/8000] y [39/8000-35/8000])");
+xlim([0 80]/8000); ylim([0 80]/8000);view(-19,23)
+
+%%% Función de Autocorrelación para tau3=6 ([58/8000-52/8000] y [67/8000-61/8000])
+figure;stem3([52 61]/8000,[58 67]/8000,[Rx1y1_3 Rx2y2_3]);grid on;grid minor;xlabel("tiempo(s)");
+ylabel("tiempo(s)");zlabel("Rxy(tau)");title("Función de Autocorrelación para tau3=6 ([58/8000-52/8000] y [67/8000-61/8000])");
+xlim([0 80]/8000); ylim([0 80]/8000);view(-19,23)
+
+%%% Función de Autocorrelación para tau4=8 ([39/8000-31/8000] y [79/8000-71/8000])
+figure;stem3([31 71]/8000,[39 79]/8000,[Rx1y1_4 Rx2y2_4]);grid on;grid minor;xlabel("tiempo(s)");
+ylabel("tiempo(s)");zlabel("Rxy(tau)");title("Función de Autocorrelación para tau4=8 ([39/8000-31/8000] y [79/8000-71/8000])");
+xlim([0 80]/8000); ylim([0 80]/8000);view(-19,23)
+
+
+
+
+
+

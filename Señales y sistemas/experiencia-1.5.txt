@@ -1,0 +1,43 @@
+clear all;clc;close all;clc;format compact;format short
+load senal_TF_201801.mat
+SM=[];
+
+for i=1:1:1000
+    SM=[SM;senal(:,80*(i-1)+1:80*i)];
+end
+%%1.5.Obtener  la  media  temporal,  la  varianza  temporal,  el  valor  
+%%cuadrático  medio  temporal  y  la función de autocorrelación temporal del 
+%%proceso. Verificar si el proceso es ergódico.
+
+media_temporal=sum(sum(SM')/80)/1000
+valor_cuadratico_medio_temporal=sum(sum((SM').^2)/80)/1000
+varianza_temporal=valor_cuadratico_medio_temporal - media_temporal^2
+
+x=SM(:,1);y=SM(:,80);
+
+Rxy=0;ii=1;jj=1;
+fdpxy=zeros(2); 
+for i=-1:2:1
+    for j=-1:2:1
+        k=length(find(x==i & y==j))/length(x);
+        fdpxy(ii,jj)=k;
+        Rxy=Rxy+i*j*k;%correlaciónRXY
+        jj=jj+1;
+    end
+    ii=ii+1;
+    jj=1;
+end
+
+x=SM(982,:);
+media_x=(length(find(x==-1))*(-1)+length(find(x==1))*(1))/80
+valor_cuadratico_medio_x=(length(find(x==-1))*(-1)^2+length(find(x==1))*(1)^2)/80
+
+
+[R tau]=xcorr(x,x);
+RX=R/length(x);
+figure,plot(tau/8000,RX),grid on;grid minor;
+title("Función de Autocorrelación temporal del proceso");
+xlabel('Tiempo(s)');ylabel('Rxx(tau)');axis([-0.01 0.01 -0.4 1.2])
+
+
+
