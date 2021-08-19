@@ -1,0 +1,76 @@
+clear all; close all; clc
+
+%constantes
+
+J= 0.01;
+b=0.1;
+K=0.01;
+R=1;
+L=0.5;
+
+%matrices del sistema
+
+
+A= [-R/L -K/L 0
+     K/J -b/J 0
+      0 1 0];
+B=[1/L
+    0
+    0];
+C= [0 0 1
+    K 0 0];
+D=[ 0
+    0];
+%Estabilidad
+polos=eig(A)
+
+%Controlabilidad
+CC=[B A*B A*A*B]
+
+%Observabilidad
+
+OO= [ C; C*A; C*A*A]
+%tiempos
+
+ti=0;
+dt=0.001;  % tiempo de la señal (frecuencia=1/T)
+tf=5; %tiempo final
+
+%Condiciones Iniciales
+x=[0; 0; 0];
+u=1; %entrada del motor
+k=1; %contador
+%Simulacion
+%Creamos un lazo
+for t= ti:dt:tf
+    %almacenar las variables
+    X1(k,1)=x(1,1); %Intensidad
+    X2(k,1)=x(2,1); %Velocidad Angular
+    X3(k,1)=x(3,1); %Posicion Angular
+    T(k,1)=t;       %Tiempo
+    %u=sin(k/pi);
+    
+    
+    %Sistema
+    xp = A*x + B*u %Ecuacion del Sistema
+    y  = C*x + D*u;%Ecuacion de Salida
+    
+    %Integracion
+    x=x+xp*dt;
+    %Contador
+    k=k+1;
+    
+end
+
+figure(1);
+subplot(211)
+plot(T,X3,'b');grid on
+ylabel('Posicion Angular')
+
+subplot(223);
+plot(T,X2,'b');grid on
+ylabel('Velocidad Angular')
+
+subplot(224)
+plot(T,X1,'b');grid on
+ylabel('Intensidad')
